@@ -1,98 +1,136 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+export default function Index() {
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.greeting}>Olá! 👋</Text>
+        <Text style={styles.subtitle}>Bem-vindo ao seu aplicativo</Text>
+      </View>
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Meu primeiro app, Márcio!
-          </ThemedText>
-        </ThemedView>
+      {/* Card principal */}
+      <View style={styles.card}>
+        <View style={styles.icon}>
+          <Text style={styles.iconText}>🚀</Text>
+        </View>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+        <Text style={styles.cardTitle}>Comece por aqui</Text>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
+        <Text style={styles.cardDescription}>
+          Este é o início do seu aplicativo. Você pode personalizar esta
+          tela e adicionar novas funcionalidades.
+        </Text>
 
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+        <Pressable
+          style={({ pressed }) => [
+            styles.button,
+            pressed && styles.buttonPressed,
+          ]}
+        >
+          <Text style={styles.buttonText}>Começar</Text>
+        </Pressable>
+      </View>
+
+      {/* Rodapé */}
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>
+          Meu primeiro aplicativo
+        </Text>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    backgroundColor: '#25292e',
+    paddingHorizontal: 24,
+    paddingTop: 60,
+    paddingBottom: 30,
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
+
+  header: {
+    marginBottom: 32,
+  },
+
+  greeting: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: '700',
+    marginBottom: 6,
+  },
+
+  subtitle: {
+    color: '#aeb4ba',
+    fontSize: 16,
+  },
+
+  card: {
+    backgroundColor: '#30363d',
+    borderRadius: 20,
+    padding: 24,
     alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+    borderWidth: 1,
+    borderColor: '#3d444d',
   },
-  heroSection: {
+
+  icon: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: '#3b82f6',
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+    marginBottom: 20,
   },
-  title: {
+
+  iconText: {
+    fontSize: 30,
+  },
+
+  cardTitle: {
+    color: '#fff',
+    fontSize: 22,
+    fontWeight: '700',
+    marginBottom: 10,
+  },
+
+  cardDescription: {
+    color: '#b8bec5',
+    fontSize: 15,
+    lineHeight: 22,
     textAlign: 'center',
+    marginBottom: 24,
   },
-  code: {
-    textTransform: 'uppercase',
+
+  button: {
+    width: '100%',
+    backgroundColor: '#3b82f6',
+    paddingVertical: 14,
+    borderRadius: 12,
+    alignItems: 'center',
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+
+  buttonPressed: {
+    opacity: 0.7,
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '700',
+  },
+
+  footer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+
+  footerText: {
+    color: '#6f767e',
+    fontSize: 13,
   },
 });
