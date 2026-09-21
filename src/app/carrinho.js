@@ -125,6 +125,48 @@ export default function Carrinho() {
             </Text>
           </View>
         </View>
+
+        <View style={styles.summaryCard}>
+          <Text style={styles.summaryTitle}>
+            Resumo do pedido
+          </Text>
+
+          <View style={styles.summaryRow}>
+            <Text style={styles.summaryLabel}>
+              Classic Burger
+            </Text>
+
+            <Text style={styles.summaryValue}>
+              {formatarPreco(subtotal)}
+            </Text>
+          </View>
+
+          <View style={styles.divider} />
+
+          <View style={styles.summaryRow}>
+            <Text style={styles.totalLabel}>Total</Text>
+
+            <Text style={styles.totalValue}>
+              {formatarPreco(subtotal)}
+            </Text>
+          </View>
+        </View>
+
+        <TouchableOpacity style={styles.couponRow}>
+          <Text style={styles.couponIcon}>🏷️</Text>
+
+          <View style={styles.couponTextArea}>
+            <Text style={styles.couponTitle}>
+              Tem um cupom de desconto?
+            </Text>
+
+            <Text style={styles.couponSubtitle}>
+              Aplique na próxima etapa
+            </Text>
+          </View>
+
+          <Text style={styles.couponArrow}>›</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -293,5 +335,95 @@ const styles = StyleSheet.create({
     fontSize: 19,
     fontWeight: "bold",
     color: "#1a1a1a",
+  },
+
+  summaryCard: {
+    backgroundColor: "#ffffff",
+    marginHorizontal: 20,
+    marginTop: 16,
+    borderRadius: 16,
+    padding: 18,
+  },
+
+  summaryTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+    marginBottom: 14,
+  },
+
+  summaryRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  summaryLabel: {
+    fontSize: 14,
+    color: "#555555",
+    flexShrink: 1,
+  },
+
+  summaryValue: {
+    fontSize: 14,
+    color: "#1a1a1a",
+    marginLeft: 10,
+  },
+
+  divider: {
+    height: 1,
+    backgroundColor: "#eeeeee",
+    marginVertical: 14,
+  },
+
+  totalLabel: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+  },
+
+  totalValue: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#e63946",
+  },
+
+  couponRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fbe2e2",
+    marginHorizontal: 20,
+    marginTop: 16,
+    padding: 16,
+    borderRadius: 14,
+  },
+
+  couponIcon: {
+    fontSize: 20,
+    marginRight: 12,
+  },
+
+  couponTextArea: {
+    flex: 1,
+    minWidth: 0,
+  },
+
+  couponTitle: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+  },
+
+  couponSubtitle: {
+    fontSize: 12,
+    color: "#777777",
+    marginTop: 2,
+  },
+
+  couponArrow: {
+    fontSize: 20,
+    color: "#e63946",
+    fontWeight: "bold",
+    marginLeft: 8,
   },
 });
