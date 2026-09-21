@@ -190,6 +190,40 @@ export default function Carrinho() {
 
         <View style={styles.scrollBottomSpace} />
       </ScrollView>
+
+      <View style={styles.bottomMenu}>
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => router.push("/home")}
+        >
+          <Text style={styles.menuIcon}>🏠</Text>
+
+          <Text style={styles.menuLabel}>Início</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.menuButton}>
+          <Text style={styles.menuIcon}>🔍</Text>
+
+          <Text style={styles.menuLabel}>Busca</Text>
+        </TouchableOpacity>
+
+        <View style={styles.menuButton}>
+          <Text style={styles.menuIconActive}>🧾</Text>
+
+          <Text style={styles.menuLabelActive}>Pedidos</Text>
+
+          <View style={styles.menuActiveBar} />
+        </View>
+
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => router.push("/perfil")}
+        >
+          <Text style={styles.menuIcon}>👤</Text>
+
+          <Text style={styles.menuLabel}>Perfil</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
@@ -488,5 +522,50 @@ const styles = StyleSheet.create({
 
   scrollBottomSpace: {
     height: 20,
+  },
+
+  bottomMenu: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingTop: 12,
+    paddingBottom: 12,
+    backgroundColor: "#ffffff",
+    borderTopWidth: 1,
+    borderTopColor: "#eeeeee",
+  },
+
+  menuButton: {
+    alignItems: "center",
+    paddingTop: 4,
+  },
+
+  menuActiveBar: {
+    width: 26,
+    height: 3,
+    borderRadius: 2,
+    backgroundColor: "#1a1a1a",
+    marginTop: 6,
+  },
+
+  menuIcon: {
+    fontSize: 20,
+    opacity: 0.5,
+  },
+
+  menuIconActive: {
+    fontSize: 20,
+  },
+
+  menuLabel: {
+    fontSize: 11,
+    marginTop: 4,
+    color: "#999999",
+  },
+
+  menuLabelActive: {
+    fontSize: 11,
+    marginTop: 4,
+    color: "#e63946",
+    fontWeight: "bold",
   },
 });
