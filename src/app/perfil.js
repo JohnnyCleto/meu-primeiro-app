@@ -3,63 +3,63 @@ import {
   Text,
   StyleSheet,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
 
 export default function Perfil() {
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Meu perfil</Text>
+    <SafeAreaView style={styles.container} edges={["top"]}>
+      <ScrollView
+        style={styles.scrollArea}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.topRow}>
+          <TouchableOpacity onPress={() => router.back()}>
+            <Text style={styles.backArrow}>‹</Text>
+          </TouchableOpacity>
 
-      <View style={styles.avatar}>
-        <Text style={styles.avatarText}>👤</Text>
-      </View>
+          <TouchableOpacity style={styles.settingsButton}>
+            <Text style={styles.settingsIcon}>⚙️</Text>
+          </TouchableOpacity>
+        </View>
 
-      <Text style={styles.name}>
-        João
-      </Text>
+        <Text style={styles.pageTitle}>Meu perfil</Text>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>
-          Dados pessoais
+        <Text style={styles.pageSubtitle}>
+          Gerencie seus dados e preferências
         </Text>
 
-        <Text style={styles.info}>
-          Nome: João
-        </Text>
+        <TouchableOpacity style={styles.profileCard}>
+          <View style={styles.avatarWrapper}>
+            <View style={styles.avatar}>
+              <Text style={styles.avatarEmoji}>🧑</Text>
+            </View>
 
-        <Text style={styles.info}>
-          E-mail: joao@email.com
-        </Text>
-      </View>
+            <View style={styles.cameraBadge}>
+              <Text style={styles.cameraIcon}>📷</Text>
+            </View>
+          </View>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>
-          Endereço
-        </Text>
+          <View style={styles.profileInfo}>
+            <Text style={styles.profileName}>João</Text>
 
-        <Text style={styles.info}>
-          Rua Principal, 100
-        </Text>
+            <Text style={styles.profileLocation}>
+              📍 Maricá - RJ
+            </Text>
 
-        <Text style={styles.info}>
-          Maricá - RJ
-        </Text>
-      </View>
+            <View style={styles.clientBadge}>
+              <Text style={styles.clientBadgeText}>
+                👑 Cliente FoodGo
+              </Text>
+            </View>
+          </View>
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>
-          Pedidos anteriores
-        </Text>
-
-        <Text style={styles.info}>
-          🍔 Classic Burger — R$ 29,90
-        </Text>
-
-        <Text style={styles.info}>
-          🍟 Batata Crocante — R$ 14,90
-        </Text>
-      </View>
-    </ScrollView>
+          <Text style={styles.cardArrow}>›</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -67,52 +67,134 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
-    padding: 20,
   },
 
-  title: {
-    fontSize: 30,
-    fontWeight: "bold",
-    marginTop: 50,
+  scrollArea: {
+    flex: 1,
   },
 
-  avatar: {
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    backgroundColor: "#ffffff",
-    justifyContent: "center",
+  topRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    alignSelf: "center",
-    marginTop: 30,
-  },
-
-  avatarText: {
-    fontSize: 45,
-  },
-
-  name: {
-    textAlign: "center",
-    fontSize: 22,
-    fontWeight: "bold",
+    marginHorizontal: 20,
     marginTop: 10,
   },
 
-  section: {
-    backgroundColor: "#ffffff",
-    padding: 18,
-    borderRadius: 12,
-    marginTop: 20,
-  },
-
-  sectionTitle: {
-    fontSize: 19,
+  backArrow: {
+    fontSize: 30,
     fontWeight: "bold",
-    marginBottom: 12,
+    color: "#1a1a1a",
   },
 
-  info: {
-    fontSize: 15,
-    marginTop: 6,
+  settingsButton: {
+    width: 36,
+    height: 36,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  settingsIcon: {
+    fontSize: 20,
+  },
+
+  pageTitle: {
+    fontSize: 26,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+    marginHorizontal: 20,
+    marginTop: 4,
+  },
+
+  pageSubtitle: {
+    fontSize: 14,
+    color: "#777777",
+    marginHorizontal: 20,
+    marginTop: 4,
+    marginBottom: 16,
+  },
+
+  profileCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+    marginHorizontal: 20,
+    borderRadius: 14,
+    padding: 14,
+  },
+
+  avatarWrapper: {
+    width: 60,
+    height: 60,
+  },
+
+  avatar: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: "#fbe2e2",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  avatarEmoji: {
+    fontSize: 28,
+  },
+
+  cameraBadge: {
+    position: "absolute",
+    bottom: -2,
+    right: -2,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    backgroundColor: "#e63946",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "#ffffff",
+  },
+
+  cameraIcon: {
+    fontSize: 10,
+  },
+
+  profileInfo: {
+    flex: 1,
+    marginLeft: 14,
+  },
+
+  profileName: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+  },
+
+  profileLocation: {
+    fontSize: 13,
+    color: "#777777",
+    marginTop: 3,
+  },
+
+  clientBadge: {
+    flexDirection: "row",
+    alignSelf: "flex-start",
+    backgroundColor: "#fbe2e2",
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    marginTop: 8,
+  },
+
+  clientBadgeText: {
+    fontSize: 11,
+    fontWeight: "bold",
+    color: "#e63946",
+  },
+
+  cardArrow: {
+    fontSize: 24,
+    color: "#cccccc",
+    fontWeight: "bold",
   },
 });
