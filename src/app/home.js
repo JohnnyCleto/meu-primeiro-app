@@ -204,42 +204,41 @@ export default function Home() {
             scrollEventThrottle={16}
           >
             {bannerSlides.map((slide) => (
-              <View key={slide.id} style={{ width: bannerWidth }}>
-                <View style={styles.bannerBg} />
-
+              <View
+                key={slide.id}
+                style={[styles.banner, { width: bannerWidth }]}
+              >
                 <View style={styles.bannerRay1} />
                 <View style={styles.bannerRay2} />
                 <View style={styles.bannerRay3} />
 
-                <View style={styles.banner}>
-                  <View style={styles.bannerTextArea}>
-                    <View style={styles.bannerTag}>
-                      <Text style={styles.bannerTagText}>
-                        {slide.tag}
-                      </Text>
-                    </View>
-
-                    <Text style={styles.bannerTitle}>
-                      {slide.titulo}
+                <View style={styles.bannerTextArea}>
+                  <View style={styles.bannerTag}>
+                    <Text style={styles.bannerTagText}>
+                      {slide.tag}
                     </Text>
-
-                    <Text style={styles.bannerSubtitle}>
-                      {slide.subtitulo}
-                    </Text>
-
-                    <TouchableOpacity style={styles.bannerButton}>
-                      <Text style={styles.bannerButtonText}>
-                        Pedir agora  ›
-                      </Text>
-                    </TouchableOpacity>
                   </View>
 
-                  <Image
-                    source={slide.imagem}
-                    style={styles.bannerImage}
-                    resizeMode="cover"
-                  />
+                  <Text style={styles.bannerTitle}>
+                    {slide.titulo}
+                  </Text>
+
+                  <Text style={styles.bannerSubtitle}>
+                    {slide.subtitulo}
+                  </Text>
+
+                  <TouchableOpacity style={styles.bannerButton}>
+                    <Text style={styles.bannerButtonText}>
+                      Pedir agora  ›
+                    </Text>
+                  </TouchableOpacity>
                 </View>
+
+                <Image
+                  source={slide.imagem}
+                  style={styles.bannerImage}
+                  resizeMode="cover"
+                />
               </View>
             ))}
           </ScrollView>
@@ -546,20 +545,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 
-  bannerBg: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "#b3212b",
-    borderRadius: 16,
-  },
-
   bannerRay1: {
     position: "absolute",
     top: 18,
-    right: 88,
+    right: "45%",
     width: 3,
     height: 22,
     borderRadius: 2,
@@ -570,7 +559,7 @@ const styles = StyleSheet.create({
   bannerRay2: {
     position: "absolute",
     top: 14,
-    right: 76,
+    right: "48%",
     width: 3,
     height: 16,
     borderRadius: 2,
@@ -580,8 +569,8 @@ const styles = StyleSheet.create({
 
   bannerRay3: {
     position: "absolute",
-    top: 30,
-    right: 100,
+    top: 32,
+    right: "43%",
     width: 3,
     height: 14,
     borderRadius: 2,
@@ -591,13 +580,18 @@ const styles = StyleSheet.create({
 
   banner: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 20,
+    alignItems: "stretch",
+    backgroundColor: "#b3212b",
+    borderRadius: 16,
+    overflow: "hidden",
+    minHeight: 170,
   },
 
   bannerTextArea: {
     flex: 1,
+    justifyContent: "center",
+    padding: 20,
+    paddingRight: 10,
   },
 
   bannerTag: {
@@ -644,10 +638,8 @@ const styles = StyleSheet.create({
   },
 
   bannerImage: {
-    width: 130,
-    height: 150,
-    borderRadius: 14,
-    marginLeft: 10,
+    width: "42%",
+    alignSelf: "stretch",
   },
 
   bannerDots: {
