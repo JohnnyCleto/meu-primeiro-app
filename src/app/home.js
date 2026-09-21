@@ -156,7 +156,10 @@ export default function Home() {
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.scrollArea}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.header}>
           <View>
             <Text style={styles.greeting}>Olá, João 👋</Text>
@@ -458,6 +461,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
+  },
+
+  scrollArea: {
+    flex: 1,
   },
 
   header: {
