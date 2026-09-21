@@ -8,6 +8,33 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 
+const acoesRapidas = [
+  {
+    id: "1",
+    icone: "📋",
+    titulo: "Seus pedidos",
+    subtitulo: "Acompanhe e veja seu histórico",
+  },
+  {
+    id: "2",
+    icone: "📍",
+    titulo: "Endereços",
+    subtitulo: "Gerencie seus endereços",
+  },
+  {
+    id: "3",
+    icone: "💳",
+    titulo: "Formas de pagamento",
+    subtitulo: "Cartões, pix e vale-refeição",
+  },
+  {
+    id: "4",
+    icone: "🎧",
+    titulo: "Atendimento",
+    subtitulo: "Precisa de ajuda? Fale conosco",
+  },
+];
+
 export default function Perfil() {
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
@@ -58,6 +85,51 @@ export default function Perfil() {
 
           <Text style={styles.cardArrow}>›</Text>
         </TouchableOpacity>
+
+        <View style={styles.promoBanner}>
+          <View style={styles.promoIconCircle}>
+            <Text style={styles.promoIcon}>👑</Text>
+          </View>
+
+          <View style={styles.promoTextArea}>
+            <Text style={styles.promoTitle}>
+              Seja FoodGo Mais
+            </Text>
+
+            <Text style={styles.promoSubtitle}>
+              Tenha mais benefícios, descontos e muito mais!
+            </Text>
+          </View>
+
+          <TouchableOpacity style={styles.promoButton}>
+            <Text style={styles.promoButtonText}>
+              Conhecer
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.quickGrid}>
+          {acoesRapidas.map((acao) => (
+            <TouchableOpacity
+              key={acao.id}
+              style={styles.quickCard}
+            >
+              <View style={styles.quickIconCircle}>
+                <Text style={styles.quickIcon}>
+                  {acao.icone}
+                </Text>
+              </View>
+
+              <Text style={styles.quickTitle} numberOfLines={1}>
+                {acao.titulo}
+              </Text>
+
+              <Text style={styles.quickSubtitle} numberOfLines={2}>
+                {acao.subtitulo}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -196,5 +268,100 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "#cccccc",
     fontWeight: "bold",
+  },
+
+  promoBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fbe2e2",
+    marginHorizontal: 20,
+    marginTop: 16,
+    padding: 14,
+    borderRadius: 14,
+  },
+
+  promoIconCircle: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#e63946",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  promoIcon: {
+    fontSize: 18,
+  },
+
+  promoTextArea: {
+    flex: 1,
+    marginLeft: 12,
+  },
+
+  promoTitle: {
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+  },
+
+  promoSubtitle: {
+    fontSize: 12,
+    color: "#777777",
+    marginTop: 2,
+  },
+
+  promoButton: {
+    backgroundColor: "#e63946",
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+    borderRadius: 20,
+    marginLeft: 8,
+  },
+
+  promoButtonText: {
+    color: "#ffffff",
+    fontSize: 12,
+    fontWeight: "bold",
+  },
+
+  quickGrid: {
+    flexDirection: "row",
+    marginHorizontal: 20,
+    marginTop: 16,
+    gap: 8,
+  },
+
+  quickCard: {
+    flex: 1,
+    backgroundColor: "#ffffff",
+    borderRadius: 12,
+    padding: 10,
+  },
+
+  quickIconCircle: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: "#fbe2e2",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  quickIcon: {
+    fontSize: 14,
+  },
+
+  quickTitle: {
+    fontSize: 12,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+    marginTop: 8,
+  },
+
+  quickSubtitle: {
+    fontSize: 10,
+    color: "#999999",
+    marginTop: 3,
+    lineHeight: 13,
   },
 });
