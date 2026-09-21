@@ -88,7 +88,7 @@ const restaurantes = [
     categoria: "Japonesa • Sushi",
     avaliacao: "4.9",
     tempo: "40-55 min",
-    emoji: "🍣",
+    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.53.jpeg"),
   },
 ];
 
