@@ -1,6 +1,7 @@
 import {
   View,
   Text,
+  Image,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
@@ -91,18 +92,37 @@ export default function Home() {
 
         <View style={styles.banner}>
           <View style={styles.bannerTextArea}>
+            <View style={styles.bannerTag}>
+              <Text style={styles.bannerTagText}>
+                ⚡ Oferta especial
+              </Text>
+            </View>
+
             <Text style={styles.bannerTitle}>
-              20% OFF{"\n"}no seu primeiro pedido
+              20% OFF
+            </Text>
+
+            <Text style={styles.bannerSubtitle}>
+              no seu primeiro pedido
             </Text>
 
             <TouchableOpacity style={styles.bannerButton}>
               <Text style={styles.bannerButtonText}>
-                Peça já
+                Pedir agora  ›
               </Text>
             </TouchableOpacity>
           </View>
 
-          <Text style={styles.bannerEmoji}>🍔</Text>
+          <Image
+            source={require("../../assets/images/burger2.jpeg")}
+            style={styles.bannerImage}
+          />
+        </View>
+
+        <View style={styles.bannerDots}>
+          <View style={[styles.dot, styles.dotActive]} />
+          <View style={styles.dot} />
+          <View style={styles.dot} />
         </View>
 
         <ScrollView
@@ -315,7 +335,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#e63946",
+    backgroundColor: "#b3212b",
     marginHorizontal: 20,
     marginTop: 20,
     borderRadius: 16,
@@ -327,11 +347,32 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  bannerTag: {
+    backgroundColor: "rgba(0,0,0,0.25)",
+    alignSelf: "flex-start",
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    marginBottom: 10,
+  },
+
+  bannerTagText: {
+    color: "#ffffff",
+    fontSize: 11,
+    fontWeight: "bold",
+  },
+
   bannerTitle: {
-    fontSize: 18,
+    fontSize: 30,
     fontWeight: "bold",
     color: "#ffffff",
-    lineHeight: 24,
+    lineHeight: 34,
+  },
+
+  bannerSubtitle: {
+    fontSize: 15,
+    color: "#ffffff",
+    marginTop: 2,
   },
 
   bannerButton: {
@@ -349,9 +390,31 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 
-  bannerEmoji: {
-    fontSize: 60,
+  bannerImage: {
+    width: 130,
+    height: 130,
+    borderRadius: 12,
     marginLeft: 10,
+  },
+
+  bannerDots: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+    gap: 5,
+  },
+
+  dot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: "#e0b3b6",
+  },
+
+  dotActive: {
+    backgroundColor: "#e63946",
+    width: 16,
   },
 
   categoriesScroll: {
