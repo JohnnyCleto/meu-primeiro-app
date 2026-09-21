@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   View,
   Text,
@@ -9,7 +10,27 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 
+const destaques = [
+  {
+    id: "1",
+    nome: "Classic Burger",
+    descricao: "Hambúrguer artesanal com queijo, alface e tomate.",
+    preco: "R$ 29,90",
+    destaque: true,
+    imagem: require("../../assets/images/burger1.jpeg"),
+  },
+  {
+    id: "2",
+    nome: "Batata Crocante",
+    descricao: "Porção de batatas fritas.",
+    preco: "R$ 14,90",
+    imagem: require("../../assets/images/batatafrita2.jpeg"),
+  },
+];
+
 export default function Restaurante() {
+  const [abaAtiva, setAbaAtiva] = useState("cardapio");
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -68,6 +89,124 @@ export default function Restaurante() {
           <Text style={styles.infoText} numberOfLines={1}>
             📍 Entrega a partir de R$ 10,00
           </Text>
+        </View>
+
+        <View style={styles.tabsCard}>
+          <View style={styles.tabsRow}>
+            <TouchableOpacity
+              style={[
+                styles.tab,
+                abaAtiva === "cardapio" && styles.tabActive,
+              ]}
+              onPress={() => setAbaAtiva("cardapio")}
+            >
+              <Text
+                style={[
+                  styles.tabText,
+                  abaAtiva === "cardapio" && styles.tabTextActive,
+                ]}
+              >
+                Cardápio
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                styles.tab,
+                abaAtiva === "avaliacoes" && styles.tabActive,
+              ]}
+              onPress={() => setAbaAtiva("avaliacoes")}
+            >
+              <Text
+                style={[
+                  styles.tabText,
+                  abaAtiva === "avaliacoes" && styles.tabTextActive,
+                ]}
+              >
+                Avaliações
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                styles.tab,
+                abaAtiva === "informacoes" && styles.tabActive,
+              ]}
+              onPress={() => setAbaAtiva("informacoes")}
+            >
+              <Text
+                style={[
+                  styles.tabText,
+                  abaAtiva === "informacoes" && styles.tabTextActive,
+                ]}
+              >
+                Informações
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.tabsDivider} />
+
+          {abaAtiva === "cardapio" && (
+            <>
+              <View style={styles.sectionHeader}>
+                <View>
+                  <Text style={styles.sectionTitle}>Destaques</Text>
+
+                  <Text style={styles.sectionSubtitle}>
+                    Os mais pedidos da casa
+                  </Text>
+                </View>
+
+                <Text style={styles.sectionLink}>Ver todos ›</Text>
+              </View>
+
+              {destaques.map((item) => (
+                <TouchableOpacity
+                  key={item.id}
+                  style={styles.foodCard}
+                  onPress={() => router.push("/prato")}
+                >
+                  <View>
+                    <Image
+                      source={item.imagem}
+                      style={styles.foodImage}
+                    />
+
+                    {item.destaque && (
+                      <View style={styles.foodBadge}>
+                        <Text style={styles.foodBadgeText}>
+                          👑 Mais pedido
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+
+                  <View style={styles.foodInfo}>
+                    <Text style={styles.foodName}>
+                      {item.nome}
+                    </Text>
+
+                    <Text
+                      style={styles.foodDescription}
+                      numberOfLines={2}
+                    >
+                      {item.descricao}
+                    </Text>
+
+                    <Text style={styles.price}>{item.preco}</Text>
+                  </View>
+
+                  <TouchableOpacity
+                    style={styles.addButton}
+                    onPress={() => router.push("/prato")}
+                  >
+                    <Text style={styles.addButtonText}>+</Text>
+                  </TouchableOpacity>
+                </TouchableOpacity>
+              ))}
+            </>
+          )}
         </View>
       </ScrollView>
     </View>
@@ -186,5 +325,149 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#cccccc",
     marginHorizontal: 8,
+  },
+
+  tabsCard: {
+    backgroundColor: "#ffffff",
+    paddingTop: 16,
+    minHeight: 400,
+  },
+
+  tabsRow: {
+    flexDirection: "row",
+    paddingHorizontal: 20,
+    gap: 10,
+  },
+
+  tab: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+  },
+
+  tabActive: {
+    backgroundColor: "#e63946",
+  },
+
+  tabText: {
+    fontSize: 14,
+    color: "#777777",
+    fontWeight: "bold",
+  },
+
+  tabTextActive: {
+    color: "#ffffff",
+  },
+
+  tabsDivider: {
+    height: 1,
+    backgroundColor: "#eeeeee",
+    marginTop: 16,
+  },
+
+  sectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginHorizontal: 20,
+    marginTop: 20,
+    marginBottom: 16,
+  },
+
+  sectionTitle: {
+    fontSize: 21,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+  },
+
+  sectionSubtitle: {
+    fontSize: 13,
+    color: "#999999",
+    marginTop: 2,
+  },
+
+  sectionLink: {
+    fontSize: 13,
+    color: "#e63946",
+    fontWeight: "bold",
+  },
+
+  foodCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+    marginHorizontal: 20,
+    marginBottom: 15,
+    borderRadius: 14,
+    padding: 10,
+    shadowColor: "#000000",
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 2,
+  },
+
+  foodImage: {
+    width: 90,
+    height: 90,
+    borderRadius: 10,
+  },
+
+  foodBadge: {
+    position: "absolute",
+    top: 6,
+    left: 6,
+    backgroundColor: "#e63946",
+    paddingVertical: 3,
+    paddingHorizontal: 7,
+    borderRadius: 20,
+  },
+
+  foodBadgeText: {
+    color: "#ffffff",
+    fontSize: 8,
+    fontWeight: "bold",
+  },
+
+  foodInfo: {
+    flex: 1,
+    minWidth: 0,
+    marginLeft: 12,
+  },
+
+  foodName: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+  },
+
+  foodDescription: {
+    fontSize: 12,
+    color: "#777777",
+    marginTop: 4,
+    lineHeight: 16,
+  },
+
+  price: {
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+    marginTop: 8,
+  },
+
+  addButton: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: "#e63946",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 8,
+  },
+
+  addButtonText: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
