@@ -321,16 +321,24 @@ export default function Home() {
         <View style={styles.menuButton}>
           <Text style={styles.menuIconActive}>🏠</Text>
 
-          <Text style={styles.menuLabelActive}>Home</Text>
+          <Text style={styles.menuLabelActive}>Início</Text>
+
+          <View style={styles.menuActiveBar} />
         </View>
+
+        <TouchableOpacity style={styles.menuButton}>
+          <Text style={styles.menuIcon}>🔍</Text>
+
+          <Text style={styles.menuLabel}>Busca</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.menuButton}
           onPress={() => router.push("/carrinho")}
         >
-          <Text style={styles.menuIcon}>🛒</Text>
+          <Text style={styles.menuIcon}>🧾</Text>
 
-          <Text style={styles.menuLabel}>Carrinho</Text>
+          <Text style={styles.menuLabel}>Pedidos</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -782,6 +790,15 @@ const styles = StyleSheet.create({
 
   menuButton: {
     alignItems: "center",
+    paddingTop: 4,
+  },
+
+  menuActiveBar: {
+    width: 26,
+    height: 3,
+    borderRadius: 2,
+    backgroundColor: "#1a1a1a",
+    marginTop: 6,
   },
 
   menuIcon: {
