@@ -89,6 +89,30 @@ const maisPedidos = [
     avaliacoes: "632",
     imagem: require("../../assets/images/pizza2.jpeg"),
   },
+  {
+    id: "4",
+    nome: "Combo Sashimi",
+    preco: "R$ 49,90",
+    avaliacao: "4.9",
+    avaliacoes: "623",
+    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.53 (1).jpeg"),
+  },
+  {
+    id: "5",
+    nome: "Macarons Sortidos",
+    preco: "R$ 18,90",
+    avaliacao: "4.5",
+    avaliacoes: "312",
+    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.51 (3).jpeg"),
+  },
+  {
+    id: "6",
+    nome: "Pepsi Lata",
+    preco: "R$ 6,50",
+    avaliacao: "4.6",
+    avaliacoes: "940",
+    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.51 (1).jpeg"),
+  },
 ];
 
 const restaurantes = [
