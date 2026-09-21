@@ -59,9 +59,17 @@ export default function Prato() {
         </View>
 
         <View style={styles.content}>
-          <Text style={styles.title}>
-            Classic Burger
-          </Text>
+          <View style={styles.titleRow}>
+            <Text style={styles.title}>
+              Classic Burger
+            </Text>
+
+            <View style={styles.ratingBadge}>
+              <Text style={styles.ratingBadgeText}>
+                ⭐ 4.8 (1,2k)
+              </Text>
+            </View>
+          </View>
 
           <Text style={styles.price}>
             R$ 29,90
@@ -194,8 +202,29 @@ const styles = StyleSheet.create({
     padding: 25,
   },
 
+  titleRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  },
+
   title: {
-    fontSize: 28,
+    flex: 1,
+    fontSize: 26,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+    marginRight: 10,
+  },
+
+  ratingBadge: {
+    backgroundColor: "#fbe2e2",
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+  },
+
+  ratingBadgeText: {
+    fontSize: 12,
     fontWeight: "bold",
     color: "#1a1a1a",
   },
