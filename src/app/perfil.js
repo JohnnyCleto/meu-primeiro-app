@@ -217,7 +217,10 @@ export default function Perfil() {
           <Text style={styles.menuLabel}>Início</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.menuButton}>
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => router.push("/busca")}
+        >
           <Text style={styles.menuIcon}>🔍</Text>
 
           <Text style={styles.menuLabel}>Busca</Text>

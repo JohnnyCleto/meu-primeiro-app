@@ -189,13 +189,16 @@ export default function Home() {
           </View>
         </View>
 
-        <View style={styles.searchBar}>
+        <TouchableOpacity
+          style={styles.searchBar}
+          onPress={() => router.push("/busca")}
+        >
           <Text style={styles.searchIcon}>🔍</Text>
 
           <Text style={styles.searchPlaceholder}>
             Buscar restaurantes, pratos...
           </Text>
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.bannerWrapper}>
           <ScrollView
@@ -436,7 +439,10 @@ export default function Home() {
           <View style={styles.menuActiveBar} />
         </View>
 
-        <TouchableOpacity style={styles.menuButton}>
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => router.push("/busca")}
+        >
           <Text style={styles.menuIcon}>🔍</Text>
 
           <Text style={styles.menuLabel}>Busca</Text>
