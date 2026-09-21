@@ -26,9 +26,31 @@ const categorias = [
 ];
 
 const maisPedidos = [
-  { id: "1", nome: "Classic Burger", preco: "R$ 29,90", emoji: "🍔" },
-  { id: "2", nome: "Batata Crocante", preco: "R$ 14,90", emoji: "🍟" },
-  { id: "3", nome: "Coca-Cola", preco: "R$ 6,90", emoji: "🥤" },
+  {
+    id: "1",
+    nome: "Classic Burger",
+    preco: "R$ 29,90",
+    avaliacao: "4.8",
+    avaliacoes: "1,2k",
+    destaque: true,
+    imagem: require("../../assets/images/burger1.jpeg"),
+  },
+  {
+    id: "2",
+    nome: "Batata Crocante",
+    preco: "R$ 14,90",
+    avaliacao: "4.6",
+    avaliacoes: "856",
+    imagem: require("../../assets/images/batatafrita2.jpeg"),
+  },
+  {
+    id: "3",
+    nome: "Pizza da Casa",
+    preco: "R$ 39,90",
+    avaliacao: "4.7",
+    avaliacoes: "632",
+    imagem: require("../../assets/images/pizza2.jpeg"),
+  },
 ];
 
 const restaurantes = [
@@ -194,19 +216,45 @@ export default function Home() {
               style={styles.pedidoCard}
               onPress={() => router.push("/prato")}
             >
-              <View style={styles.pedidoImage}>
-                <Text style={styles.pedidoEmoji}>
-                  {item.emoji}
-                </Text>
+              <View>
+                <Image
+                  source={item.imagem}
+                  style={styles.pedidoImage}
+                />
+
+                {item.destaque && (
+                  <View style={styles.pedidoBadge}>
+                    <Text style={styles.pedidoBadgeText}>
+                      🔥 Mais pedido
+                    </Text>
+                  </View>
+                )}
+
+                <View style={styles.favoriteButton}>
+                  <Text style={styles.favoriteIcon}>♡</Text>
+                </View>
               </View>
 
               <Text style={styles.pedidoNome} numberOfLines={1}>
                 {item.nome}
               </Text>
 
+              <Text style={styles.pedidoRating}>
+                ⭐ {item.avaliacao} ({item.avaliacoes})
+              </Text>
+
               <Text style={styles.pedidoPreco}>
                 {item.preco}
               </Text>
+
+              <TouchableOpacity
+                style={styles.addButton}
+                onPress={() => router.push("/prato")}
+              >
+                <Text style={styles.addButtonText}>
+                  🛒 Adicionar
+                </Text>
+              </TouchableOpacity>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -529,36 +577,87 @@ const styles = StyleSheet.create({
 
   pedidoCard: {
     backgroundColor: "#ffffff",
-    borderRadius: 12,
-    padding: 12,
+    borderRadius: 14,
+    paddingBottom: 12,
     marginRight: 14,
-    width: 120,
+    width: 170,
+    overflow: "hidden",
   },
 
   pedidoImage: {
-    height: 70,
-    borderRadius: 8,
-    backgroundColor: "#eeeeee",
+    width: "100%",
+    height: 100,
+  },
+
+  pedidoBadge: {
+    position: "absolute",
+    top: 8,
+    left: 8,
+    backgroundColor: "#e63946",
+    paddingVertical: 3,
+    paddingHorizontal: 8,
+    borderRadius: 20,
+  },
+
+  pedidoBadgeText: {
+    color: "#ffffff",
+    fontSize: 10,
+    fontWeight: "bold",
+  },
+
+  favoriteButton: {
+    position: "absolute",
+    top: 8,
+    right: 8,
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    backgroundColor: "rgba(255,255,255,0.9)",
     justifyContent: "center",
     alignItems: "center",
   },
 
-  pedidoEmoji: {
-    fontSize: 32,
+  favoriteIcon: {
+    fontSize: 15,
+    color: "#e63946",
   },
 
   pedidoNome: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: "bold",
-    marginTop: 8,
+    marginTop: 10,
+    marginHorizontal: 12,
     color: "#1a1a1a",
   },
 
-  pedidoPreco: {
-    fontSize: 13,
-    color: "#e63946",
-    fontWeight: "bold",
+  pedidoRating: {
+    fontSize: 12,
+    color: "#999999",
     marginTop: 4,
+    marginHorizontal: 12,
+  },
+
+  pedidoPreco: {
+    fontSize: 15,
+    color: "#1a1a1a",
+    fontWeight: "bold",
+    marginTop: 6,
+    marginHorizontal: 12,
+  },
+
+  addButton: {
+    backgroundColor: "#e63946",
+    borderRadius: 8,
+    paddingVertical: 8,
+    alignItems: "center",
+    marginTop: 10,
+    marginHorizontal: 12,
+  },
+
+  addButtonText: {
+    color: "#ffffff",
+    fontSize: 12,
+    fontWeight: "bold",
   },
 
   card: {
