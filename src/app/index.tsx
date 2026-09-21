@@ -1,43 +1,22 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { router } from "expo-router";
 
-export default function Index() {
+export default function Login() {
+  function entrar() {
+    router.replace("/home");
+  }
+
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.greeting}>Olá! 👋</Text>
-        <Text style={styles.subtitle}>Bem-vindo ao seu aplicativo</Text>
-      </View>
+      <Text style={styles.logo}>FoodGo</Text>
 
-      {/* Card principal */}
-      <View style={styles.card}>
-        <View style={styles.icon}>
-          <Text style={styles.iconText}>🚀</Text>
-        </View>
+      <Text style={styles.subtitle}>
+        Seu pedido, do seu jeito.
+      </Text>
 
-        <Text style={styles.cardTitle}>Comece por aqui</Text>
-
-        <Text style={styles.cardDescription}>
-          Este é o início do seu aplicativo. Você pode personalizar esta
-          tela e adicionar novas funcionalidades.
-        </Text>
-
-        <Pressable
-          style={({ pressed }) => [
-            styles.button,
-            pressed && styles.buttonPressed,
-          ]}
-        >
-          <Text style={styles.buttonText}>Começar</Text>
-        </Pressable>
-      </View>
-
-      {/* Rodapé */}
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>
-          Meu primeiro aplicativo
-        </Text>
-      </View>
+      <TouchableOpacity style={styles.button} onPress={entrar}>
+        <Text style={styles.buttonText}>Entrar</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -45,92 +24,34 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#25292e',
-    paddingHorizontal: 24,
-    paddingTop: 60,
-    paddingBottom: 30,
-  },
-
-  header: {
-    marginBottom: 32,
-  },
-
-  greeting: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: '700',
-    marginBottom: 6,
-  },
-
-  subtitle: {
-    color: '#aeb4ba',
-    fontSize: 16,
-  },
-
-  card: {
-    backgroundColor: '#30363d',
-    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
     padding: 24,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#3d444d',
+    backgroundColor: "#ffffff",
   },
 
-  icon: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: '#3b82f6',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 20,
-  },
-
-  iconText: {
-    fontSize: 30,
-  },
-
-  cardTitle: {
-    color: '#fff',
-    fontSize: 22,
-    fontWeight: '700',
+  logo: {
+    fontSize: 42,
+    fontWeight: "bold",
     marginBottom: 10,
   },
 
-  cardDescription: {
-    color: '#b8bec5',
-    fontSize: 15,
-    lineHeight: 22,
-    textAlign: 'center',
-    marginBottom: 24,
+  subtitle: {
+    fontSize: 18,
+    marginBottom: 40,
   },
 
   button: {
-    width: '100%',
-    backgroundColor: '#3b82f6',
-    paddingVertical: 14,
-    borderRadius: 12,
-    alignItems: 'center',
-  },
-
-  buttonPressed: {
-    opacity: 0.7,
+    width: "80%",
+    padding: 16,
+    borderRadius: 10,
+    alignItems: "center",
+    backgroundColor: "#e63946",
   },
 
   buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '700',
-  },
-
-  footer: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-
-  footerText: {
-    color: '#6f767e',
-    fontSize: 13,
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
