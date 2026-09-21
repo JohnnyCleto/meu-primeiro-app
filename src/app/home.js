@@ -20,9 +20,21 @@ const categorias = [
     nome: "Pizza",
     imagem: require("../../assets/images/pizza1.jpeg"),
   },
-  { id: "3", nome: "Japonesa", emoji: "🍣" },
-  { id: "4", nome: "Doces", emoji: "🍰" },
-  { id: "5", nome: "Bebidas", emoji: "🥤" },
+  {
+    id: "3",
+    nome: "Japonesa",
+    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.52 (4).jpeg"),
+  },
+  {
+    id: "4",
+    nome: "Doces",
+    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.52 (3).jpeg"),
+  },
+  {
+    id: "5",
+    nome: "Bebidas",
+    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.52.jpeg"),
+  },
 ];
 
 const maisPedidos = [
