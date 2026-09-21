@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   View,
   Text,
@@ -5,9 +6,34 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  useWindowDimensions,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
+
+const bannerSlides = [
+  {
+    id: "1",
+    tag: "⚡ Oferta especial",
+    titulo: "20% OFF",
+    subtitulo: "no seu primeiro pedido",
+    imagem: require("../../assets/images/burger2.jpeg"),
+  },
+  {
+    id: "2",
+    tag: "🍕 Sexta da pizza",
+    titulo: "Compre 1 Leve 2",
+    subtitulo: "em todas as pizzas grandes",
+    imagem: require("../../assets/images/pizza2.jpeg"),
+  },
+  {
+    id: "3",
+    tag: "🥤 Bebida grátis",
+    titulo: "Acima de R$ 50",
+    subtitulo: "ganhe uma bebida no pedido",
+    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.51 (2).jpeg"),
+  },
+];
 
 const categorias = [
   {
@@ -93,6 +119,17 @@ const restaurantes = [
 ];
 
 export default function Home() {
+  const { width } = useWindowDimensions();
+  const bannerWidth = width - 40;
+  const [bannerIndex, setBannerIndex] = useState(0);
+
+  function onBannerScroll(event) {
+    const index = Math.round(
+      event.nativeEvent.contentOffset.x / bannerWidth
+    );
+    setBannerIndex(index);
+  }
+
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -131,39 +168,60 @@ export default function Home() {
           </Text>
         </View>
 
-        <View style={styles.banner}>
-          <View style={styles.bannerTextArea}>
-            <View style={styles.bannerTag}>
-              <Text style={styles.bannerTagText}>
-                ⚡ Oferta especial
-              </Text>
-            </View>
+        <View style={styles.bannerWrapper}>
+          <ScrollView
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            onScroll={onBannerScroll}
+            scrollEventThrottle={16}
+          >
+            {bannerSlides.map((slide) => (
+              <View
+                key={slide.id}
+                style={[styles.banner, { width: bannerWidth }]}
+              >
+                <View style={styles.bannerTextArea}>
+                  <View style={styles.bannerTag}>
+                    <Text style={styles.bannerTagText}>
+                      {slide.tag}
+                    </Text>
+                  </View>
 
-            <Text style={styles.bannerTitle}>
-              20% OFF
-            </Text>
+                  <Text style={styles.bannerTitle}>
+                    {slide.titulo}
+                  </Text>
 
-            <Text style={styles.bannerSubtitle}>
-              no seu primeiro pedido
-            </Text>
+                  <Text style={styles.bannerSubtitle}>
+                    {slide.subtitulo}
+                  </Text>
 
-            <TouchableOpacity style={styles.bannerButton}>
-              <Text style={styles.bannerButtonText}>
-                Pedir agora  ›
-              </Text>
-            </TouchableOpacity>
-          </View>
+                  <TouchableOpacity style={styles.bannerButton}>
+                    <Text style={styles.bannerButtonText}>
+                      Pedir agora  ›
+                    </Text>
+                  </TouchableOpacity>
+                </View>
 
-          <Image
-            source={require("../../assets/images/burger2.jpeg")}
-            style={styles.bannerImage}
-          />
+                <Image
+                  source={slide.imagem}
+                  style={styles.bannerImage}
+                />
+              </View>
+            ))}
+          </ScrollView>
         </View>
 
         <View style={styles.bannerDots}>
-          <View style={[styles.dot, styles.dotActive]} />
-          <View style={styles.dot} />
-          <View style={styles.dot} />
+          {bannerSlides.map((slide, index) => (
+            <View
+              key={slide.id}
+              style={[
+                styles.dot,
+                index === bannerIndex && styles.dotActive,
+              ]}
+            />
+          ))}
         </View>
 
         <ScrollView
@@ -446,13 +504,16 @@ const styles = StyleSheet.create({
     color: "#999999",
   },
 
+  bannerWrapper: {
+    marginHorizontal: 20,
+    marginTop: 20,
+  },
+
   banner: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#b3212b",
-    marginHorizontal: 20,
-    marginTop: 20,
     borderRadius: 16,
     padding: 20,
     overflow: "hidden",
