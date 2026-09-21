@@ -10,12 +10,19 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 
 const categorias = [
-  { id: "1", nome: "Lanches", emoji: "🍔" },
-  { id: "2", nome: "Pizza", emoji: "🍕" },
+  {
+    id: "1",
+    nome: "Lanches",
+    imagem: require("../../assets/images/burger1.jpeg"),
+  },
+  {
+    id: "2",
+    nome: "Pizza",
+    imagem: require("../../assets/images/pizza1.jpeg"),
+  },
   { id: "3", nome: "Japonesa", emoji: "🍣" },
   { id: "4", nome: "Doces", emoji: "🍰" },
   { id: "5", nome: "Bebidas", emoji: "🥤" },
-  { id: "6", nome: "Saudável", emoji: "🥗" },
 ];
 
 const maisPedidos = [
@@ -137,9 +144,16 @@ export default function Home() {
               style={styles.categoryItem}
             >
               <View style={styles.categoryCircle}>
-                <Text style={styles.categoryEmoji}>
-                  {categoria.emoji}
-                </Text>
+                {categoria.imagem ? (
+                  <Image
+                    source={categoria.imagem}
+                    style={styles.categoryImage}
+                  />
+                ) : (
+                  <Text style={styles.categoryEmoji}>
+                    {categoria.emoji}
+                  </Text>
+                )}
               </View>
 
               <Text style={styles.categoryName}>
@@ -147,6 +161,16 @@ export default function Home() {
               </Text>
             </TouchableOpacity>
           ))}
+
+          <TouchableOpacity style={styles.categoryItem}>
+            <View style={styles.categoryCircleMuted}>
+              <Text style={styles.categoryArrow}>›</Text>
+            </View>
+
+            <Text style={styles.categoryName}>
+              Ver todas
+            </Text>
+          </TouchableOpacity>
         </ScrollView>
 
         <View style={styles.sectionHeader}>
@@ -435,13 +459,34 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#fbe2e2",
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+  },
+
+  categoryCircleMuted: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: "#eeeeee",
     justifyContent: "center",
     alignItems: "center",
   },
 
+  categoryImage: {
+    width: "100%",
+    height: "100%",
+  },
+
   categoryEmoji: {
     fontSize: 26,
+  },
+
+  categoryArrow: {
+    fontSize: 26,
+    color: "#777777",
+    fontWeight: "bold",
   },
 
   categoryName: {
