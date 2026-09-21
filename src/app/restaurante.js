@@ -10,6 +10,35 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 
+const categorias = [
+  {
+    id: "1",
+    nome: "Hambúrgueres",
+    ativa: true,
+    imagem: require("../../assets/images/burger2.jpeg"),
+  },
+  {
+    id: "2",
+    nome: "Batatas",
+    imagem: require("../../assets/images/batatafrita1.jpeg"),
+  },
+  {
+    id: "3",
+    nome: "Bebidas",
+    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.52.jpeg"),
+  },
+  {
+    id: "4",
+    nome: "Porções",
+    imagem: require("../../assets/images/batatafritacombife.jpeg"),
+  },
+  {
+    id: "5",
+    nome: "Sobremesas",
+    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.52 (3).jpeg"),
+  },
+];
+
 const destaques = [
   {
     id: "1",
@@ -30,6 +59,7 @@ const destaques = [
 
 export default function Restaurante() {
   const [abaAtiva, setAbaAtiva] = useState("cardapio");
+  const [categoriaAtiva, setCategoriaAtiva] = useState("1");
 
   return (
     <View style={styles.container}>
@@ -205,6 +235,51 @@ export default function Restaurante() {
                   </TouchableOpacity>
                 </TouchableOpacity>
               ))}
+
+              <View style={styles.sectionHeader}>
+                <Text style={styles.sectionTitle}>Categorias</Text>
+
+                <Text style={styles.sectionLink}>Ver todas ›</Text>
+              </View>
+
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.categoriesContent}
+              >
+                {categorias.map((categoria) => (
+                  <TouchableOpacity
+                    key={categoria.id}
+                    style={styles.categoryItem}
+                    onPress={() => setCategoriaAtiva(categoria.id)}
+                  >
+                    <View
+                      style={[
+                        styles.categoryCircle,
+                        categoriaAtiva === categoria.id &&
+                          styles.categoryCircleActive,
+                      ]}
+                    >
+                      <Image
+                        source={categoria.imagem}
+                        style={styles.categoryImage}
+                      />
+                    </View>
+
+                    <Text
+                      style={[
+                        styles.categoryName,
+                        categoriaAtiva === categoria.id &&
+                          styles.categoryNameActive,
+                      ]}
+                    >
+                      {categoria.nome}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </ScrollView>
+
+              <View style={styles.scrollBottomSpace} />
             </>
           )}
         </View>
@@ -469,5 +544,49 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 18,
     fontWeight: "bold",
+  },
+
+  categoriesContent: {
+    paddingHorizontal: 20,
+  },
+
+  categoryItem: {
+    alignItems: "center",
+    marginRight: 18,
+    width: 66,
+  },
+
+  categoryCircle: {
+    width: 62,
+    height: 62,
+    borderRadius: 31,
+    overflow: "hidden",
+    borderWidth: 2,
+    borderColor: "transparent",
+  },
+
+  categoryCircleActive: {
+    borderColor: "#e63946",
+  },
+
+  categoryImage: {
+    width: "100%",
+    height: "100%",
+  },
+
+  categoryName: {
+    fontSize: 12,
+    color: "#777777",
+    marginTop: 6,
+    textAlign: "center",
+  },
+
+  categoryNameActive: {
+    color: "#e63946",
+    fontWeight: "bold",
+  },
+
+  scrollBottomSpace: {
+    height: 20,
   },
 });
