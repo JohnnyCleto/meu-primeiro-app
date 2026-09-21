@@ -60,17 +60,25 @@ export default function Home() {
 
             <TouchableOpacity style={styles.locationRow}>
               <Text style={styles.locationText}>
-                📍 Maricá - RJ
+                📍 Maricá - RJ  ⌄
               </Text>
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity
-            style={styles.iconButton}
-            onPress={() => router.push("/perfil")}
-          >
-            <Text style={styles.iconButtonText}>🔔</Text>
-          </TouchableOpacity>
+          <View style={styles.headerIcons}>
+            <TouchableOpacity style={styles.iconButton}>
+              <Text style={styles.iconButtonText}>🔔</Text>
+
+              <View style={styles.notificationDot} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={() => router.push("/perfil")}
+            >
+              <Text style={styles.iconButtonText}>👤</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.searchBar}>
@@ -252,6 +260,11 @@ const styles = StyleSheet.create({
     color: "#777777",
   },
 
+  headerIcons: {
+    flexDirection: "row",
+    gap: 10,
+  },
+
   iconButton: {
     width: 44,
     height: 44,
@@ -263,6 +276,18 @@ const styles = StyleSheet.create({
 
   iconButtonText: {
     fontSize: 18,
+  },
+
+  notificationDot: {
+    position: "absolute",
+    top: 9,
+    right: 11,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "#e63946",
+    borderWidth: 1,
+    borderColor: "#ffffff",
   },
 
   searchBar: {
