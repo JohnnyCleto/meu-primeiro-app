@@ -1,76 +1,73 @@
 import {
   View,
   Text,
+  Image,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-
+import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 
 export default function Restaurante() {
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
-          <Text style={styles.backText}>← Voltar</Text>
-        </TouchableOpacity>
+      <ScrollView
+        style={styles.scrollArea}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.hero}>
+          <Image
+            source={require("../../assets/images/burger2.jpeg")}
+            style={styles.heroImage}
+          />
 
-        <Text style={styles.title}>Burger House</Text>
+          <SafeAreaView edges={["top"]} style={styles.heroTopRow}>
+            <TouchableOpacity
+              style={styles.heroIconButton}
+              onPress={() => router.back()}
+            >
+              <Text style={styles.heroIconText}>←</Text>
+            </TouchableOpacity>
 
-        <Text style={styles.description}>
-          Hambúrgueres, batatas e bebidas.
-        </Text>
+            <View style={styles.heroActions}>
+              <TouchableOpacity style={styles.heroIconButton}>
+                <Text style={styles.heroIconText}>♡</Text>
+              </TouchableOpacity>
 
-        <Text style={styles.sectionTitle}>
-          Cardápio
-        </Text>
+              <TouchableOpacity style={styles.heroIconButton}>
+                <Text style={styles.heroIconText}>⇪</Text>
+              </TouchableOpacity>
+            </View>
+          </SafeAreaView>
 
-        <TouchableOpacity
-          style={styles.foodCard}
-          onPress={() => router.push("/prato")}
-        >
-          <View style={styles.foodImage}>
-            <Text style={styles.foodEmoji}>🍔</Text>
+          <View style={styles.storeNameRow}>
+            <View style={styles.storeLogo}>
+              <Text style={styles.storeLogoIcon}>🍔</Text>
+            </View>
+
+            <View style={styles.storeNameTextArea}>
+              <Text style={styles.storeName}>Burger House</Text>
+
+              <Text style={styles.storeSubtitle}>
+                Hambúrgueres, batatas e bebidas.
+              </Text>
+            </View>
           </View>
+        </View>
 
-          <View style={styles.foodInfo}>
-            <Text style={styles.foodName}>
-              Classic Burger
-            </Text>
+        <View style={styles.infoBar}>
+          <Text style={styles.infoText}>⭐ 4.8 (1,2k)</Text>
 
-            <Text style={styles.foodDescription}>
-              Hambúrguer artesanal com queijo,
-              alface e tomate.
-            </Text>
+          <Text style={styles.infoDivider}>|</Text>
 
-            <Text style={styles.price}>
-              R$ 29,90
-            </Text>
-          </View>
-        </TouchableOpacity>
+          <Text style={styles.infoText}>🕐 30-45 min</Text>
 
-        <View style={styles.foodCard}>
-          <View style={styles.foodImage}>
-            <Text style={styles.foodEmoji}>🍟</Text>
-          </View>
+          <Text style={styles.infoDivider}>|</Text>
 
-          <View style={styles.foodInfo}>
-            <Text style={styles.foodName}>
-              Batata Crocante
-            </Text>
-
-            <Text style={styles.foodDescription}>
-              Porção de batatas fritas.
-            </Text>
-
-            <Text style={styles.price}>
-              R$ 14,90
-            </Text>
-          </View>
+          <Text style={styles.infoText} numberOfLines={1}>
+            📍 Entrega a partir de R$ 10,00
+          </Text>
         </View>
       </ScrollView>
     </View>
@@ -83,76 +80,111 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
   },
 
-  backButton: {
-    marginTop: 55,
-    marginLeft: 20,
+  scrollArea: {
+    flex: 1,
   },
 
-  backText: {
-    fontSize: 17,
+  hero: {
+    width: "100%",
+    height: 280,
+    backgroundColor: "#1a1a1a",
   },
 
-  title: {
-    fontSize: 30,
-    fontWeight: "bold",
-    marginHorizontal: 20,
-    marginTop: 20,
+  heroImage: {
+    width: "100%",
+    height: "100%",
   },
 
-  description: {
-    fontSize: 16,
-    marginHorizontal: 20,
-    marginTop: 5,
-  },
-
-  sectionTitle: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginHorizontal: 20,
-    marginTop: 30,
-    marginBottom: 15,
-  },
-
-  foodCard: {
+  heroTopRow: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
     flexDirection: "row",
-    backgroundColor: "#ffffff",
-    marginHorizontal: 20,
-    marginBottom: 15,
-    borderRadius: 12,
-    padding: 12,
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingTop: 10,
   },
 
-  foodImage: {
-    width: 100,
-    height: 100,
-    backgroundColor: "#eeeeee",
+  heroActions: {
+    flexDirection: "row",
+    gap: 10,
+  },
+
+  heroIconButton: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    backgroundColor: "rgba(0,0,0,0.45)",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10,
   },
 
-  foodEmoji: {
-    fontSize: 45,
+  heroIconText: {
+    fontSize: 17,
+    color: "#ffffff",
   },
 
-  foodInfo: {
+  storeNameRow: {
+    position: "absolute",
+    left: 20,
+    bottom: 16,
+    right: 20,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  storeLogo: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: "#e63946",
+    borderWidth: 2,
+    borderColor: "#ffffff",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  storeLogoIcon: {
+    fontSize: 24,
+  },
+
+  storeNameTextArea: {
     flex: 1,
+    minWidth: 0,
     marginLeft: 12,
   },
 
-  foodName: {
-    fontSize: 18,
+  storeName: {
+    fontSize: 22,
     fontWeight: "bold",
+    color: "#ffffff",
   },
 
-  foodDescription: {
+  storeSubtitle: {
     fontSize: 13,
-    marginTop: 5,
+    color: "#f0f0f0",
+    marginTop: 2,
   },
 
-  price: {
-    fontSize: 17,
+  infoBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#f5f5f5",
+    paddingHorizontal: 20,
+    paddingVertical: 14,
+  },
+
+  infoText: {
+    fontSize: 12,
+    color: "#333333",
     fontWeight: "bold",
-    marginTop: 8,
+    flexShrink: 1,
+  },
+
+  infoDivider: {
+    fontSize: 12,
+    color: "#cccccc",
+    marginHorizontal: 8,
   },
 });
