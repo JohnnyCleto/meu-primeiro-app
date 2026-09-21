@@ -259,6 +259,22 @@ export default function Home() {
           ))}
         </ScrollView>
 
+        <TouchableOpacity style={styles.deliveryBanner}>
+          <Text style={styles.deliveryIcon}>🛵</Text>
+
+          <View style={styles.deliveryTextArea}>
+            <Text style={styles.deliveryTitle}>
+              Entrega rápida e segura
+            </Text>
+
+            <Text style={styles.deliverySubtitle}>
+              Seu pedido chega quentinho e no prazo!
+            </Text>
+          </View>
+
+          <Text style={styles.deliveryArrow}>›</Text>
+        </TouchableOpacity>
+
         <Text style={[styles.sectionTitle, styles.sectionTitleSpaced]}>
           Restaurantes perto de você
         </Text>
@@ -699,6 +715,43 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginTop: 8,
     color: "#444444",
+  },
+
+  deliveryBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fbe2e2",
+    marginHorizontal: 20,
+    marginTop: 24,
+    padding: 16,
+    borderRadius: 12,
+  },
+
+  deliveryIcon: {
+    fontSize: 26,
+    marginRight: 12,
+  },
+
+  deliveryTextArea: {
+    flex: 1,
+  },
+
+  deliveryTitle: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+  },
+
+  deliverySubtitle: {
+    fontSize: 12,
+    color: "#777777",
+    marginTop: 2,
+  },
+
+  deliveryArrow: {
+    fontSize: 22,
+    color: "#e63946",
+    fontWeight: "bold",
   },
 
   scrollBottomSpace: {
