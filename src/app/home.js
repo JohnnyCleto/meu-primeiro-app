@@ -60,7 +60,7 @@ const restaurantes = [
     categoria: "Hambúrguer • Lanches",
     avaliacao: "4.8",
     tempo: "30-40 min",
-    emoji: "🍔",
+    imagem: require("../../assets/images/burger2.jpeg"),
   },
   {
     id: "2",
@@ -68,7 +68,7 @@ const restaurantes = [
     categoria: "Pizza • Italiana",
     avaliacao: "4.6",
     tempo: "35-50 min",
-    emoji: "🍕",
+    imagem: require("../../assets/images/pizza1.jpeg"),
   },
   {
     id: "3",
@@ -286,9 +286,16 @@ export default function Home() {
             onPress={() => router.push("/restaurante")}
           >
             <View style={styles.imagePlaceholder}>
-              <Text style={styles.imageText}>
-                {restaurante.emoji}
-              </Text>
+              {restaurante.imagem ? (
+                <Image
+                  source={restaurante.imagem}
+                  style={styles.restauranteImage}
+                />
+              ) : (
+                <Text style={styles.imageText}>
+                  {restaurante.emoji}
+                </Text>
+              )}
             </View>
 
             <View style={styles.cardContent}>
@@ -693,6 +700,11 @@ const styles = StyleSheet.create({
 
   imageText: {
     fontSize: 60,
+  },
+
+  restauranteImage: {
+    width: "100%",
+    height: "100%",
   },
 
   cardContent: {
