@@ -5,11 +5,9 @@ const restaurants = [
     category: "Hambúrguer • Lanches",
     rating: "4.8",
     deliveryTime: "30-40 min",
-    image: "🍔",
-
-    description:
-      "Hambúrgueres artesanais, batatas e bebidas.",
-
+    image: require("../../assets/images/burger1.jpeg"),
+    emoji: "🍔",
+    description: "Hambúrgueres artesanais, batatas e bebidas.",
     foods: [
       {
         id: 1,
@@ -32,16 +30,14 @@ const restaurants = [
         name: "Batata Crocante",
         price: 14.9,
         image: "🍟",
-        description:
-          "Porção de batatas fritas crocantes.",
+        description: "Porção de batatas fritas crocantes.",
       },
       {
         id: 4,
         name: "Refrigerante",
         price: 7.9,
         image: "🥤",
-        description:
-          "Refrigerante gelado de 350ml.",
+        description: "Refrigerante gelado de 350ml.",
       },
     ],
   },
@@ -52,19 +48,17 @@ const restaurants = [
     category: "Pizza • Italiana",
     rating: "4.7",
     deliveryTime: "35-45 min",
-    image: "🍕",
-
+    image: require("../../assets/images/pizza1.jpeg"),
+    emoji: "🍕",
     description:
       "Pizzas artesanais preparadas com ingredientes selecionados.",
-
     foods: [
       {
         id: 5,
         name: "Pizza de Calabresa",
         price: 39.9,
         image: "🍕",
-        description:
-          "Pizza com molho de tomate, queijo e calabresa.",
+        description: "Pizza com molho de tomate, queijo e calabresa.",
       },
       {
         id: 6,
@@ -91,27 +85,22 @@ const restaurants = [
     category: "Japonesa • Sushi",
     rating: "4.9",
     deliveryTime: "40-50 min",
-    image: "🍣",
-
-    description:
-      "Comida japonesa preparada na hora.",
-
+    image: require("../../assets/images/SushiHouse.jpeg"),
+    description: "Comida japonesa preparada na hora.",
     foods: [
       {
         id: 8,
         name: "Combo Sushi",
         price: 49.9,
-        image: "🍣",
-        description:
-          "Combo com diferentes tipos de sushi.",
+        image: require("../../assets/images/ComboSushi.jpeg"),
+        description: "Combo com diferentes tipos de sushi.",
       },
       {
         id: 9,
         name: "Temaki Salmão",
         price: 24.9,
-        image: "🍣",
-        description:
-          "Temaki de salmão com arroz e alga.",
+        image: require("../../assets/images/Salmão.jpeg"),
+        description: "Temaki de salmão com arroz e alga.",
       },
     ],
   },

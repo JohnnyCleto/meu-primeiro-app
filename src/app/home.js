@@ -11,6 +11,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 
+import restaurants from "../data/restaurants";
+
 const bannerSlides = [
   {
     id: "1",
@@ -49,7 +51,7 @@ const categorias = [
   {
     id: "3",
     nome: "Japonesa",
-    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.52 (4).jpeg"),
+    imagem: require("../../assets/images/Japonesa.jpeg"),
   },
   {
     id: "4",
@@ -95,7 +97,7 @@ const maisPedidos = [
     preco: "R$ 49,90",
     avaliacao: "4.9",
     avaliacoes: "623",
-    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.53 (1).jpeg"),
+    imagem: require("../../assets/images/Sashimi.jpeg"),
   },
   {
     id: "5",
@@ -103,7 +105,7 @@ const maisPedidos = [
     preco: "R$ 18,90",
     avaliacao: "4.5",
     avaliacoes: "312",
-    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.51 (3).jpeg"),
+    imagem: require("../../assets/images/Macarons.jpeg"),
   },
   {
     id: "6",
@@ -111,49 +113,43 @@ const maisPedidos = [
     preco: "R$ 6,50",
     avaliacao: "4.6",
     avaliacoes: "940",
-    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.51 (1).jpeg"),
-  },
-];
-
-const restaurantes = [
-  {
-    id: "1",
-    nome: "Burger House",
-    categoria: "Hambúrguer • Lanches",
-    avaliacao: "4.8",
-    tempo: "30-40 min",
-    imagem: require("../../assets/images/burger2.jpeg"),
-  },
-  {
-    id: "2",
-    nome: "Pizza Bella",
-    categoria: "Pizza • Italiana",
-    avaliacao: "4.6",
-    tempo: "35-50 min",
-    imagem: require("../../assets/images/pizza1.jpeg"),
-  },
-  {
-    id: "3",
-    nome: "Sushi Kimura",
-    categoria: "Japonesa • Sushi",
-    avaliacao: "4.9",
-    tempo: "40-55 min",
-    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.53.jpeg"),
+    imagem: require("../../assets/images/Pepsi.jpeg"),
   },
 ];
 
 export default function Home() {
   const { width } = useWindowDimensions();
+
   const bannerWidth = width - 40;
   const bannerHeight = 190;
   const bannerImageWidth = Math.round(bannerWidth * 0.42);
+
   const [bannerIndex, setBannerIndex] = useState(0);
 
   function onBannerScroll(event) {
     const index = Math.round(
       event.nativeEvent.contentOffset.x / bannerWidth
     );
+
     setBannerIndex(index);
+  }
+
+  function abrirRestaurante(restaurante) {
+    router.push({
+      pathname: "/restaurante",
+      params: {
+        restaurantId: restaurante.id.toString(),
+      },
+    });
+  }
+
+  function abrirPrato(prato) {
+    router.push({
+      pathname: "/prato",
+      params: {
+        pratoId: prato.id.toString(),
+      },
+    });
   }
 
   return (
@@ -164,7 +160,9 @@ export default function Home() {
       >
         <View style={styles.header}>
           <View>
-            <Text style={styles.greeting}>Olá, João 👋</Text>
+            <Text style={styles.greeting}>
+              Olá, João 👋
+            </Text>
 
             <TouchableOpacity style={styles.locationRow}>
               <Text style={styles.locationText}>
@@ -175,7 +173,9 @@ export default function Home() {
 
           <View style={styles.headerIcons}>
             <TouchableOpacity style={styles.iconButton}>
-              <Text style={styles.iconButtonText}>🔔</Text>
+              <Text style={styles.iconButtonText}>
+                🔔
+              </Text>
 
               <View style={styles.notificationDot} />
             </TouchableOpacity>
@@ -184,7 +184,9 @@ export default function Home() {
               style={styles.iconButton}
               onPress={() => router.push("/perfil")}
             >
-              <Text style={styles.iconButtonText}>👤</Text>
+              <Text style={styles.iconButtonText}>
+                👤
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -193,7 +195,9 @@ export default function Home() {
           style={styles.searchBar}
           onPress={() => router.push("/busca")}
         >
-          <Text style={styles.searchIcon}>🔍</Text>
+          <Text style={styles.searchIcon}>
+            🔍
+          </Text>
 
           <Text style={styles.searchPlaceholder}>
             Buscar restaurantes, pratos...
@@ -213,7 +217,10 @@ export default function Home() {
                 key={slide.id}
                 style={[
                   styles.banner,
-                  { width: bannerWidth, height: bannerHeight },
+                  {
+                    width: bannerWidth,
+                    height: bannerHeight,
+                  },
                 ]}
               >
                 <View style={styles.bannerRay1} />
@@ -235,7 +242,10 @@ export default function Home() {
                     {slide.subtitulo}
                   </Text>
 
-                  <TouchableOpacity style={styles.bannerButton}>
+                  <TouchableOpacity
+                    style={styles.bannerButton}
+                    onPress={() => router.push("/busca")}
+                  >
                     <Text style={styles.bannerButtonText}>
                       Pedir agora  ›
                     </Text>
@@ -246,7 +256,10 @@ export default function Home() {
                   source={slide.imagem}
                   style={[
                     styles.bannerImage,
-                    { width: bannerImageWidth, height: bannerHeight },
+                    {
+                      width: bannerImageWidth,
+                      height: bannerHeight,
+                    },
                   ]}
                   resizeMode="cover"
                 />
@@ -297,9 +310,14 @@ export default function Home() {
             </TouchableOpacity>
           ))}
 
-          <TouchableOpacity style={styles.categoryItem}>
+          <TouchableOpacity
+            style={styles.categoryItem}
+            onPress={() => router.push("/busca")}
+          >
             <View style={styles.categoryCircleMuted}>
-              <Text style={styles.categoryArrow}>›</Text>
+              <Text style={styles.categoryArrow}>
+                ›
+              </Text>
             </View>
 
             <Text style={styles.categoryName}>
@@ -313,9 +331,13 @@ export default function Home() {
             Mais pedidos
           </Text>
 
-          <Text style={styles.sectionLink}>
-            Ver tudo
-          </Text>
+          <TouchableOpacity
+            onPress={() => router.push("/busca")}
+          >
+            <Text style={styles.sectionLink}>
+              Ver tudo
+            </Text>
+          </TouchableOpacity>
         </View>
 
         <ScrollView
@@ -324,56 +346,66 @@ export default function Home() {
           contentContainerStyle={styles.pedidosContent}
         >
           {maisPedidos.map((item) => (
-            <TouchableOpacity
+            <View
               key={item.id}
               style={styles.pedidoCard}
-              onPress={() => router.push("/prato")}
             >
-              <View>
-                <Image
-                  source={item.imagem}
-                  style={styles.pedidoImage}
-                />
+              <TouchableOpacity
+                onPress={() => abrirPrato(item)}
+              >
+                <View>
+                  <Image
+                    source={item.imagem}
+                    style={styles.pedidoImage}
+                  />
 
-                {item.destaque && (
-                  <View style={styles.pedidoBadge}>
-                    <Text style={styles.pedidoBadgeText}>
-                      🔥 Mais pedido
+                  {item.destaque && (
+                    <View style={styles.pedidoBadge}>
+                      <Text style={styles.pedidoBadgeText}>
+                        🔥 Mais pedido
+                      </Text>
+                    </View>
+                  )}
+
+                  <View style={styles.favoriteButton}>
+                    <Text style={styles.favoriteIcon}>
+                      ♡
                     </Text>
                   </View>
-                )}
-
-                <View style={styles.favoriteButton}>
-                  <Text style={styles.favoriteIcon}>♡</Text>
                 </View>
-              </View>
 
-              <Text style={styles.pedidoNome} numberOfLines={1}>
-                {item.nome}
-              </Text>
+                <Text
+                  style={styles.pedidoNome}
+                  numberOfLines={1}
+                >
+                  {item.nome}
+                </Text>
 
-              <Text style={styles.pedidoRating}>
-                ⭐ {item.avaliacao} ({item.avaliacoes})
-              </Text>
+                <Text style={styles.pedidoRating}>
+                  ⭐ {item.avaliacao} ({item.avaliacoes})
+                </Text>
 
-              <Text style={styles.pedidoPreco}>
-                {item.preco}
-              </Text>
+                <Text style={styles.pedidoPreco}>
+                  {item.preco}
+                </Text>
+              </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.addButton}
-                onPress={() => router.push("/prato")}
+                onPress={() => abrirPrato(item)}
               >
                 <Text style={styles.addButtonText}>
                   🛒 Adicionar
                 </Text>
               </TouchableOpacity>
-            </TouchableOpacity>
+            </View>
           ))}
         </ScrollView>
 
         <TouchableOpacity style={styles.deliveryBanner}>
-          <Text style={styles.deliveryIcon}>🛵</Text>
+          <Text style={styles.deliveryIcon}>
+            🛵
+          </Text>
 
           <View style={styles.deliveryTextArea}>
             <Text style={styles.deliveryTitle}>
@@ -385,43 +417,51 @@ export default function Home() {
             </Text>
           </View>
 
-          <Text style={styles.deliveryArrow}>›</Text>
+          <Text style={styles.deliveryArrow}>
+            ›
+          </Text>
         </TouchableOpacity>
 
-        <Text style={[styles.sectionTitle, styles.sectionTitleSpaced]}>
+        <Text
+          style={[
+            styles.sectionTitle,
+            styles.sectionTitleSpaced,
+          ]}
+        >
           Restaurantes perto de você
         </Text>
 
-        {restaurantes.map((restaurante) => (
+        {restaurants.map((restaurante) => (
           <TouchableOpacity
             key={restaurante.id}
             style={styles.card}
-            onPress={() => router.push("/restaurante")}
+            onPress={() => abrirRestaurante(restaurante)}
           >
             <View style={styles.imagePlaceholder}>
-              {restaurante.imagem ? (
+              {restaurante.image ? (
                 <Image
-                  source={restaurante.imagem}
+                  source={restaurante.image}
                   style={styles.restauranteImage}
                 />
               ) : (
                 <Text style={styles.imageText}>
-                  {restaurante.emoji}
+                  {restaurante.emoji || "🍽️"}
                 </Text>
               )}
             </View>
 
             <View style={styles.cardContent}>
               <Text style={styles.restaurantName}>
-                {restaurante.nome}
+                {restaurante.name}
               </Text>
 
               <Text style={styles.category}>
-                {restaurante.categoria}
+                {restaurante.category}
               </Text>
 
               <Text style={styles.rating}>
-                ⭐ {restaurante.avaliacao} • {restaurante.tempo}
+                ⭐ {restaurante.rating} •{" "}
+                {restaurante.deliveryTime}
               </Text>
             </View>
           </TouchableOpacity>
@@ -432,9 +472,13 @@ export default function Home() {
 
       <View style={styles.bottomMenu}>
         <View style={styles.menuButton}>
-          <Text style={styles.menuIconActive}>🏠</Text>
+          <Text style={styles.menuIconActive}>
+            🏠
+          </Text>
 
-          <Text style={styles.menuLabelActive}>Início</Text>
+          <Text style={styles.menuLabelActive}>
+            Início
+          </Text>
 
           <View style={styles.menuActiveBar} />
         </View>
@@ -443,27 +487,39 @@ export default function Home() {
           style={styles.menuButton}
           onPress={() => router.push("/busca")}
         >
-          <Text style={styles.menuIcon}>🔍</Text>
+          <Text style={styles.menuIcon}>
+            🔍
+          </Text>
 
-          <Text style={styles.menuLabel}>Busca</Text>
+          <Text style={styles.menuLabel}>
+            Busca
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.menuButton}
           onPress={() => router.push("/carrinho")}
         >
-          <Text style={styles.menuIcon}>🧾</Text>
+          <Text style={styles.menuIcon}>
+            🧾
+          </Text>
 
-          <Text style={styles.menuLabel}>Pedidos</Text>
+          <Text style={styles.menuLabel}>
+            Pedidos
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.menuButton}
           onPress={() => router.push("/perfil")}
         >
-          <Text style={styles.menuIcon}>👤</Text>
+          <Text style={styles.menuIcon}>
+            👤
+          </Text>
 
-          <Text style={styles.menuLabel}>Perfil</Text>
+          <Text style={styles.menuLabel}>
+            Perfil
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

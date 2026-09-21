@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   View,
   Text,
@@ -8,6 +9,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 
@@ -21,6 +23,7 @@ const itens = [
     imagem: require("../../assets/images/burger1.jpeg"),
     destino: "/prato",
   },
+
   {
     id: "2",
     tipo: "prato",
@@ -30,6 +33,7 @@ const itens = [
     imagem: require("../../assets/images/batatafrita2.jpeg"),
     destino: "/prato",
   },
+
   {
     id: "3",
     tipo: "prato",
@@ -39,6 +43,7 @@ const itens = [
     imagem: require("../../assets/images/pizza2.jpeg"),
     destino: "/prato",
   },
+
   {
     id: "4",
     tipo: "restaurante",
@@ -48,6 +53,7 @@ const itens = [
     imagem: require("../../assets/images/burger2.jpeg"),
     destino: "/restaurante",
   },
+
   {
     id: "5",
     tipo: "restaurante",
@@ -57,13 +63,14 @@ const itens = [
     imagem: require("../../assets/images/pizza1.jpeg"),
     destino: "/restaurante",
   },
+
   {
     id: "6",
     tipo: "restaurante",
     nome: "Sushi Kimura",
     subtitulo: "Japonesa • Sushi",
     extra: "⭐ 4.9 • 40-55 min",
-    imagem: require("../../assets/images/WhatsApp Image 2026-09-21 at 18.02.53.jpeg"),
+    imagem: require("../../assets/images/SushiHouse.jpeg"),
     destino: "/restaurante",
   },
 ];
@@ -122,9 +129,7 @@ export default function Busca() {
                   style={styles.recentChip}
                   onPress={() => setBusca(item)}
                 >
-                  <Text style={styles.recentChipText}>
-                    🕘 {item}
-                  </Text>
+                  <Text style={styles.recentChipText}>🕘 {item}</Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -176,7 +181,6 @@ export default function Busca() {
           onPress={() => router.push("/home")}
         >
           <Text style={styles.menuIcon}>🏠</Text>
-
           <Text style={styles.menuLabel}>Início</Text>
         </TouchableOpacity>
 
@@ -193,7 +197,6 @@ export default function Busca() {
           onPress={() => router.push("/carrinho")}
         >
           <Text style={styles.menuIcon}>🧾</Text>
-
           <Text style={styles.menuLabel}>Pedidos</Text>
         </TouchableOpacity>
 
@@ -202,7 +205,6 @@ export default function Busca() {
           onPress={() => router.push("/perfil")}
         >
           <Text style={styles.menuIcon}>👤</Text>
-
           <Text style={styles.menuLabel}>Perfil</Text>
         </TouchableOpacity>
       </View>
