@@ -35,6 +35,41 @@ const acoesRapidas = [
   },
 ];
 
+const listaOpcoes = [
+  {
+    id: "1",
+    icone: "👤",
+    titulo: "Dados pessoais",
+    subtitulo: "Nome, e-mail e informações de contato",
+  },
+  {
+    id: "2",
+    icone: "📍",
+    titulo: "Endereço de entrega",
+    subtitulo: "Rua Principal, 100 - Maricá, RJ",
+  },
+  {
+    id: "3",
+    icone: "🛍️",
+    titulo: "Pedidos anteriores",
+    subtitulo: "Veja todos os seus pedidos",
+    destino: "/carrinho",
+  },
+  {
+    id: "4",
+    icone: "🛡️",
+    titulo: "Central de privacidade",
+    subtitulo: "Seus dados estão seguros com a gente",
+  },
+  {
+    id: "5",
+    icone: "🛵",
+    titulo: "Tem um problema com seu pedido?",
+    subtitulo: "Resolva aqui de forma rápida e fácil",
+    destaque: true,
+  },
+];
+
 export default function Perfil() {
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
@@ -130,6 +165,46 @@ export default function Perfil() {
             </TouchableOpacity>
           ))}
         </View>
+
+        <View style={styles.optionsList}>
+          {listaOpcoes.map((opcao) => (
+            <TouchableOpacity
+              key={opcao.id}
+              style={[
+                styles.optionRow,
+                opcao.destaque && styles.optionRowDestaque,
+              ]}
+              onPress={() =>
+                opcao.destino && router.push(opcao.destino)
+              }
+            >
+              <View
+                style={[
+                  styles.optionIconCircle,
+                  opcao.destaque && styles.optionIconCircleDestaque,
+                ]}
+              >
+                <Text style={styles.optionIcon}>
+                  {opcao.icone}
+                </Text>
+              </View>
+
+              <View style={styles.optionTextArea}>
+                <Text style={styles.optionTitle}>
+                  {opcao.titulo}
+                </Text>
+
+                <Text style={styles.optionSubtitle}>
+                  {opcao.subtitulo}
+                </Text>
+              </View>
+
+              <Text style={styles.optionArrow}>›</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <View style={styles.scrollBottomSpace} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -363,5 +438,67 @@ const styles = StyleSheet.create({
     color: "#999999",
     marginTop: 3,
     lineHeight: 13,
+  },
+
+  optionsList: {
+    marginHorizontal: 20,
+    marginTop: 20,
+  },
+
+  optionRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+  },
+
+  optionRowDestaque: {
+    backgroundColor: "#fbe2e2",
+  },
+
+  optionIconCircle: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#fbe2e2",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  optionIconCircleDestaque: {
+    backgroundColor: "#ffffff",
+  },
+
+  optionIcon: {
+    fontSize: 18,
+  },
+
+  optionTextArea: {
+    flex: 1,
+    marginLeft: 14,
+  },
+
+  optionTitle: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+  },
+
+  optionSubtitle: {
+    fontSize: 12,
+    color: "#777777",
+    marginTop: 3,
+  },
+
+  optionArrow: {
+    fontSize: 20,
+    color: "#cccccc",
+    fontWeight: "bold",
+  },
+
+  scrollBottomSpace: {
+    height: 10,
   },
 });
