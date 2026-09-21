@@ -39,6 +39,60 @@ const categorias = [
   },
 ];
 
+const avaliacoes = [
+  {
+    id: "1",
+    nome: "Marina Silva",
+    estrelas: 5,
+    comentario:
+      "Hambúrguer excelente, chegou quentinho e no prazo certinho!",
+    tempo: "há 2 dias",
+  },
+  {
+    id: "2",
+    nome: "Pedro Costa",
+    estrelas: 4,
+    comentario:
+      "Muito bom, só achei a batata um pouco salgada dessa vez.",
+    tempo: "há 5 dias",
+  },
+  {
+    id: "3",
+    nome: "Ana Beatriz",
+    estrelas: 5,
+    comentario:
+      "Meu lanche favorito da região, sempre peço o Classic Burger!",
+    tempo: "há 1 semana",
+  },
+];
+
+const informacoes = [
+  {
+    id: "1",
+    icone: "📍",
+    titulo: "Endereço",
+    valor: "Av. das Palmeiras, 320 - Centro, Maricá - RJ",
+  },
+  {
+    id: "2",
+    icone: "🕐",
+    titulo: "Horário de funcionamento",
+    valor: "Todos os dias, das 18h às 23h30",
+  },
+  {
+    id: "3",
+    icone: "📞",
+    titulo: "Telefone",
+    valor: "(21) 99876-5432",
+  },
+  {
+    id: "4",
+    icone: "💳",
+    titulo: "Formas de pagamento",
+    valor: "Cartão, Pix e dinheiro",
+  },
+];
+
 const destaques = [
   {
     id: "1",
@@ -281,6 +335,76 @@ export default function Restaurante() {
 
               <View style={styles.scrollBottomSpace} />
             </>
+          )}
+
+          {abaAtiva === "avaliacoes" && (
+            <View style={styles.avaliacoesList}>
+              <View style={styles.avaliacoesSummary}>
+                <Text style={styles.avaliacoesSummaryScore}>
+                  4.8
+                </Text>
+
+                <View>
+                  <Text style={styles.avaliacoesSummaryStars}>
+                    ⭐⭐⭐⭐⭐
+                  </Text>
+
+                  <Text style={styles.avaliacoesSummaryCount}>
+                    Baseado em 1.200 avaliações
+                  </Text>
+                </View>
+              </View>
+
+              {avaliacoes.map((avaliacao) => (
+                <View key={avaliacao.id} style={styles.reviewCard}>
+                  <View style={styles.reviewHeader}>
+                    <Text style={styles.reviewName}>
+                      {avaliacao.nome}
+                    </Text>
+
+                    <Text style={styles.reviewTempo}>
+                      {avaliacao.tempo}
+                    </Text>
+                  </View>
+
+                  <Text style={styles.reviewStars}>
+                    {"⭐".repeat(avaliacao.estrelas)}
+                  </Text>
+
+                  <Text style={styles.reviewComment}>
+                    {avaliacao.comentario}
+                  </Text>
+                </View>
+              ))}
+
+              <View style={styles.scrollBottomSpace} />
+            </View>
+          )}
+
+          {abaAtiva === "informacoes" && (
+            <View style={styles.infoList}>
+              {informacoes.map((info) => (
+                <View key={info.id} style={styles.infoRow}>
+                  <View style={styles.infoIconCircle}>
+                    <Text style={styles.infoIconText}>
+                      {info.icone}
+                    </Text>
+                  </View>
+
+                  <View style={styles.infoRowTextArea}>
+                    <Text style={styles.infoRowTitle}>
+                      {info.titulo}
+                    </Text>
+
+                    <Text style={styles.infoRowValue}>
+                      {info.valor}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+
+              <View style={styles.scrollBottomSpace} />
+            </View>
           )}
         </View>
       </ScrollView>
@@ -588,5 +712,122 @@ const styles = StyleSheet.create({
 
   scrollBottomSpace: {
     height: 20,
+  },
+
+  avaliacoesList: {
+    marginTop: 20,
+    paddingHorizontal: 20,
+  },
+
+  avaliacoesSummary: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fbe2e2",
+    borderRadius: 14,
+    padding: 18,
+    marginBottom: 20,
+    gap: 16,
+  },
+
+  avaliacoesSummaryScore: {
+    fontSize: 36,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+  },
+
+  avaliacoesSummaryStars: {
+    fontSize: 14,
+  },
+
+  avaliacoesSummaryCount: {
+    fontSize: 12,
+    color: "#777777",
+    marginTop: 4,
+  },
+
+  reviewCard: {
+    backgroundColor: "#ffffff",
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 14,
+    shadowColor: "#000000",
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 2,
+  },
+
+  reviewHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  reviewName: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+  },
+
+  reviewTempo: {
+    fontSize: 11,
+    color: "#999999",
+  },
+
+  reviewStars: {
+    fontSize: 12,
+    marginTop: 4,
+  },
+
+  reviewComment: {
+    fontSize: 13,
+    color: "#555555",
+    marginTop: 8,
+    lineHeight: 18,
+  },
+
+  infoList: {
+    marginTop: 20,
+    paddingHorizontal: 20,
+  },
+
+  infoRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 14,
+  },
+
+  infoIconCircle: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#fbe2e2",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  infoIconText: {
+    fontSize: 18,
+  },
+
+  infoRowTextArea: {
+    flex: 1,
+    minWidth: 0,
+    marginLeft: 14,
+  },
+
+  infoRowTitle: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+  },
+
+  infoRowValue: {
+    fontSize: 12,
+    color: "#777777",
+    marginTop: 3,
   },
 });
