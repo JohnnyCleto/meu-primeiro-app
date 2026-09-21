@@ -1,10 +1,12 @@
 import {
   View,
   Text,
+  Image,
   StyleSheet,
+  ScrollView,
   TouchableOpacity,
 } from "react-native";
-
+import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 
 export default function Prato() {
@@ -14,41 +16,73 @@ export default function Prato() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => router.back()}
+      <ScrollView
+        style={styles.scrollArea}
+        showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.backText}>← Voltar</Text>
-      </TouchableOpacity>
+        <View style={styles.hero}>
+          <Image
+            source={require("../../assets/images/burger1.jpeg")}
+            style={styles.heroImage}
+          />
 
-      <View style={styles.image}>
-        <Text style={styles.emoji}>🍔</Text>
-      </View>
+          <SafeAreaView edges={["top"]} style={styles.heroTopRow}>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => router.back()}
+            >
+              <Text style={styles.backText}>← Voltar</Text>
+            </TouchableOpacity>
 
-      <View style={styles.content}>
-        <Text style={styles.title}>
-          Classic Burger
-        </Text>
+            <View style={styles.heroActions}>
+              <TouchableOpacity style={styles.heroIconButton}>
+                <Text style={styles.heroIconText}>♡</Text>
+              </TouchableOpacity>
 
-        <Text style={styles.price}>
-          R$ 29,90
-        </Text>
+              <TouchableOpacity style={styles.heroIconButton}>
+                <Text style={styles.heroIconText}>⇪</Text>
+              </TouchableOpacity>
+            </View>
+          </SafeAreaView>
 
-        <Text style={styles.description}>
-          Hambúrguer artesanal preparado com carne,
-          queijo, alface, tomate e molho especial
-          da casa.
-        </Text>
+          <View style={styles.heroBadge}>
+            <Text style={styles.heroBadgeText}>
+              👑 Mais pedido
+            </Text>
+          </View>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={adicionarCarrinho}
-        >
-          <Text style={styles.buttonText}>
-            Adicionar ao carrinho
+          <View style={styles.heroDots}>
+            <View style={[styles.dot, styles.dotActive]} />
+            <View style={styles.dot} />
+            <View style={styles.dot} />
+          </View>
+        </View>
+
+        <View style={styles.content}>
+          <Text style={styles.title}>
+            Classic Burger
           </Text>
-        </TouchableOpacity>
-      </View>
+
+          <Text style={styles.price}>
+            R$ 29,90
+          </Text>
+
+          <Text style={styles.description}>
+            Hambúrguer artesanal preparado com carne,
+            queijo, alface, tomate e molho especial
+            da casa.
+          </Text>
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={adicionarCarrinho}
+          >
+            <Text style={styles.buttonText}>
+              🛒 Adicionar ao carrinho
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -59,25 +93,101 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
   },
 
+  scrollArea: {
+    flex: 1,
+  },
+
+  hero: {
+    width: "100%",
+    height: 340,
+    backgroundColor: "#eeeeee",
+  },
+
+  heroImage: {
+    width: "100%",
+    height: "100%",
+  },
+
+  heroTopRow: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingTop: 10,
+  },
+
   backButton: {
-    marginTop: 55,
-    marginLeft: 20,
+    backgroundColor: "rgba(255,255,255,0.9)",
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+    borderRadius: 20,
   },
 
   backText: {
-    fontSize: 17,
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#1a1a1a",
   },
 
-  image: {
-    height: 300,
-    marginTop: 20,
-    backgroundColor: "#eeeeee",
+  heroActions: {
+    flexDirection: "row",
+    gap: 10,
+  },
+
+  heroIconButton: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    backgroundColor: "rgba(255,255,255,0.9)",
     justifyContent: "center",
     alignItems: "center",
   },
 
-  emoji: {
-    fontSize: 120,
+  heroIconText: {
+    fontSize: 17,
+    color: "#1a1a1a",
+  },
+
+  heroBadge: {
+    position: "absolute",
+    top: 70,
+    left: 16,
+    backgroundColor: "#e63946",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+  },
+
+  heroBadgeText: {
+    color: "#ffffff",
+    fontSize: 12,
+    fontWeight: "bold",
+  },
+
+  heroDots: {
+    position: "absolute",
+    bottom: 14,
+    left: 0,
+    right: 0,
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 5,
+  },
+
+  dot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: "rgba(255,255,255,0.6)",
+  },
+
+  dotActive: {
+    backgroundColor: "#ffffff",
+    width: 16,
   },
 
   content: {
@@ -87,24 +197,27 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "bold",
+    color: "#1a1a1a",
   },
 
   price: {
     fontSize: 22,
     fontWeight: "bold",
     marginTop: 10,
+    color: "#e63946",
   },
 
   description: {
     fontSize: 16,
     lineHeight: 24,
     marginTop: 20,
+    color: "#555555",
   },
 
   button: {
     backgroundColor: "#e63946",
     padding: 17,
-    borderRadius: 10,
+    borderRadius: 30,
     marginTop: 30,
     alignItems: "center",
   },
