@@ -145,6 +145,8 @@ const restaurantes = [
 export default function Home() {
   const { width } = useWindowDimensions();
   const bannerWidth = width - 40;
+  const bannerHeight = 190;
+  const bannerImageWidth = Math.round(bannerWidth * 0.42);
   const [bannerIndex, setBannerIndex] = useState(0);
 
   function onBannerScroll(event) {
@@ -206,7 +208,10 @@ export default function Home() {
             {bannerSlides.map((slide) => (
               <View
                 key={slide.id}
-                style={[styles.banner, { width: bannerWidth }]}
+                style={[
+                  styles.banner,
+                  { width: bannerWidth, height: bannerHeight },
+                ]}
               >
                 <View style={styles.bannerRay1} />
                 <View style={styles.bannerRay2} />
@@ -236,7 +241,10 @@ export default function Home() {
 
                 <Image
                   source={slide.imagem}
-                  style={styles.bannerImage}
+                  style={[
+                    styles.bannerImage,
+                    { width: bannerImageWidth, height: bannerHeight },
+                  ]}
                   resizeMode="cover"
                 />
               </View>
@@ -580,11 +588,9 @@ const styles = StyleSheet.create({
 
   banner: {
     flexDirection: "row",
-    alignItems: "stretch",
     backgroundColor: "#b3212b",
     borderRadius: 16,
     overflow: "hidden",
-    minHeight: 170,
   },
 
   bannerTextArea: {
@@ -637,10 +643,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 
-  bannerImage: {
-    width: "42%",
-    alignSelf: "stretch",
-  },
+  bannerImage: {},
 
   bannerDots: {
     flexDirection: "row",
