@@ -9,6 +9,14 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 
+const ingredientes = [
+  { id: "1", emoji: "🥩", nome: "Carne artesanal" },
+  { id: "2", emoji: "🧀", nome: "Queijo" },
+  { id: "3", emoji: "🥬", nome: "Alface" },
+  { id: "4", emoji: "🍅", nome: "Tomate" },
+  { id: "5", emoji: "🥣", nome: "Molho especial da casa" },
+];
+
 export default function Prato() {
   function adicionarCarrinho() {
     router.push("/carrinho");
@@ -80,6 +88,34 @@ export default function Prato() {
             queijo, alface, tomate e molho especial
             da casa.
           </Text>
+
+          <View style={styles.ingredientesBox}>
+            <Text style={styles.ingredientesTitle}>
+              Ingredientes
+            </Text>
+
+            <View style={styles.ingredientesList}>
+              {ingredientes.map((ingrediente) => (
+                <View
+                  key={ingrediente.id}
+                  style={styles.ingredienteItem}
+                >
+                  <View style={styles.ingredienteCircle}>
+                    <Text style={styles.ingredienteEmoji}>
+                      {ingrediente.emoji}
+                    </Text>
+                  </View>
+
+                  <Text
+                    style={styles.ingredienteNome}
+                    numberOfLines={2}
+                  >
+                    {ingrediente.nome}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          </View>
 
           <TouchableOpacity
             style={styles.button}
@@ -241,6 +277,50 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginTop: 20,
     color: "#555555",
+  },
+
+  ingredientesBox: {
+    backgroundColor: "#fbe2e2",
+    borderRadius: 14,
+    padding: 16,
+    marginTop: 24,
+  },
+
+  ingredientesTitle: {
+    fontSize: 17,
+    fontWeight: "bold",
+    color: "#1a1a1a",
+    marginBottom: 14,
+  },
+
+  ingredientesList: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  ingredienteItem: {
+    alignItems: "center",
+    width: 60,
+  },
+
+  ingredienteCircle: {
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+    backgroundColor: "#ffffff",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  ingredienteEmoji: {
+    fontSize: 24,
+  },
+
+  ingredienteNome: {
+    fontSize: 11,
+    color: "#555555",
+    textAlign: "center",
+    marginTop: 6,
   },
 
   button: {
