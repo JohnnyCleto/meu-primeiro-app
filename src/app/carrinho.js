@@ -167,6 +167,28 @@ export default function Carrinho() {
 
           <Text style={styles.couponArrow}>›</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.finalizeButton}
+          onPress={finalizarPedido}
+        >
+          <Text style={styles.finalizeButtonText}>
+            🔒 Finalizar pedido
+          </Text>
+
+          <Text style={styles.finalizeArrow}>›</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.continueLink}
+          onPress={() => router.push("/home")}
+        >
+          <Text style={styles.continueLinkText}>
+            ← Continuar comprando
+          </Text>
+        </TouchableOpacity>
+
+        <View style={styles.scrollBottomSpace} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -425,5 +447,46 @@ const styles = StyleSheet.create({
     color: "#e63946",
     fontWeight: "bold",
     marginLeft: 8,
+  },
+
+  finalizeButton: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#e63946",
+    marginHorizontal: 20,
+    marginTop: 20,
+    paddingVertical: 16,
+    paddingHorizontal: 22,
+    borderRadius: 30,
+  },
+
+  finalizeButtonText: {
+    flex: 1,
+    textAlign: "center",
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+
+  finalizeArrow: {
+    color: "#ffffff",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+
+  continueLink: {
+    alignItems: "center",
+    marginTop: 16,
+  },
+
+  continueLinkText: {
+    fontSize: 14,
+    color: "#555555",
+    fontWeight: "bold",
+  },
+
+  scrollBottomSpace: {
+    height: 20,
   },
 });
